@@ -1,29 +1,14 @@
+/**
+ * 向外暴露路由对象模块
+ */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-
+import routes from './routes'
+// 声明使用vue插件
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
-
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+// 暴露一个使用default 暴露一个路由器实例
+export default new VueRouter({
+  mode: 'history', // 路径没有#
+  routes // 路由数组
 })
-
-export default router
