@@ -29,13 +29,15 @@ export default {
   },
 
   // 获取商品分类数组的异步action  不一定有状态state(由接口函数是否需要来确定)
-  async getCategorys ({ commit }) {
+  async getCategorys ({ commit }, callback) {
     // 1.发送异步请求
     const result = await reqCategorys()
     // 2.请求成功后,提交给mutation
     if (result.code === 0) {
       const categorys = result.data
-      commit(RECEIVE_CATEGORYS, categorys)
+      commit(RECEIVE_CATEGORYS, categorys) // 内部同步调用mutation更新状态数据
+      // 在数据更新后,调用回调函数,对传入参数进行判断
+      typeof callback === 'function' && callback()
     }
   },
 

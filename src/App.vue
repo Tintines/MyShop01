@@ -17,7 +17,7 @@ export default {
   // },
   async mounted () {
     // 通知actions异步获取address并保存到state
-    this.$store.dispatch('getAddress')
+    // this.$store.dispatch('getAddress')
   },
   // 引入并局部注册FooterGuide组件
   components: {

@@ -2,7 +2,7 @@ const path = require('path')
 const px2rem = require('postcss-px2rem') // px适配
 
 module.exports = { // 只能写Vue封装的配置
-  // lintOnSave: false, // 关闭EsLint的规则
+  lintOnSave: false, // 关闭EsLint的规则
 
   css: {
     loaderOptions: {

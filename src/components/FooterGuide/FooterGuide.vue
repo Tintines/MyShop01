@@ -62,6 +62,7 @@ export default {
         bottom 0
         height 50px
         width 100%
+        background #ffffff
         display flex
         .guide-item
             display flex

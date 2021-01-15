@@ -351,3 +351,69 @@ yarn add axios
 yarn add vuex
 ```
 写vuex文件夹
+
+## 3.动态更新页面
+### 3.1 MSite
+1.异步显示当前地址
+2.异步显示商家列表
+  设置空状态占位图
+3.异步显示商品分类
+  设置空状态占位图
+
+### 3.2 工具库lodash
+别的组件库包含的lodash,不需要再次下载
+
+### 3.3 mintui使用及按需加载
+设置数据到之前的loading动画,要在ajax中的拦截器中分别设置开启和关闭
+```
+yarn add mint-ui
+
+下载编译插件  开发环境
+yarn add babel-plugin-component -D
+
+添加配置babel.config.js
+module.exports = {
+  presets: [
+    '@vue/cli-plugin-babel/preset'
+  ],
+  plugins: [
+    ['component', {
+      "libraryName": "mint-ui", // 针对mint-ui库实现按需引入打包
+      "style": true // 自动打包对应的css
+    }]
+  ]
+}
+
+```
+### 3.1 Login页面
+1). 一次性图形验证码
+        通过<img src="url">请求后台获取验证码图片显示
+        点击回调中更新img的src, 并携带时间戳参数, 更新验证码
+    2). 一次性短信验证码
+        使用第三方短信平台(容联)接口
+            注册/登陆
+            添加测试号码
+            修改账号ID/Token/AppID
+            重新运行最终版的后台和前台应用
+        请求发送验证码短信
+        使用mint-ui实现对不同结果的不同提示效果
+    3).  手机号/验证码登陆
+    4). 用户名/密码/验证码登陆
+        发送ajax请求, 得到返回的结果
+        根据结果的标识(code)来判断登陆请求是否成功
+            1: 不成功, 显示提示
+            0: 成功, 保存user到state, 保存token到storage, 返回到个人中心
+
+### 3.2 修改输入框获取焦点及placeholder样式
+input
+  &:focus
+      border 1px solid #02a774
+  &::placeholder  //修改 placeholder 样式
+      color #ccc
+
+### 3.3 修改输入框获取焦点时清空placeholder
+<input type="tel" maxlength="11" placeholder="手机号" v-model="phone" onfocus="this.placeholder=''" onblur="this.placeholder='手机号'">
+
+
+
+

@@ -10,4 +10,4 @@ export const reqAddress = (longitude, latitude) => ajax(`/position/${latitude},$
 export const reqCategorys = () => ajax('/index_category')
 
 // 3.根据经纬度获取商铺列表    返回的是 promise对象
-export const reqShops = ({ longitude, latitude }) => ajax('/shops', { params: { longitude, latitude } })
+export const reqShops = ({ longitude, latitude }) => ajax('/shops', { params: { latitude, longitude } })
