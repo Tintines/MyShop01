@@ -405,14 +405,39 @@ module.exports = {
             0: 成功, 保存user到state, 保存token到storage, 返回到个人中心
 
 ### 3.2 修改输入框获取焦点及placeholder样式
+```
 input
   &:focus
       border 1px solid #02a774
-  &::placeholder  //修改 placeholder 样式
+  &::placeholder  //修改 **placeholder** 样式
       color #ccc
-
+```
 ### 3.3 修改输入框获取焦点时清空placeholder
+```
 <input type="tel" maxlength="11" placeholder="手机号" v-model="phone" onfocus="this.placeholder=''" onblur="this.placeholder='手机号'">
+
+```
+## 4.动态更新login页面
+
+### 4.1 容联云使用
+发送真实短信
+https://www.yuntongxun.com/?ly=baidu-pz-p&qd=cpc&cp=ppc&xl=null&kw=10360228
+
+配置服务器
+参照自己账户的信息
+util 文件夹
+修改ACCOUNT_SID   AUTH_TOKEN    AppID
+
+### 4.2 vee-validate表单验证  第三方库
+```
+下载: yarn add vee-validate@2.2.15
+    引入插件:
+        import Vue from 'vue'
+        import VeeValidate from 'vee-validate'
+        
+        Vue.use(VeeValidate)
+```
+
 
 
 

@@ -17,7 +17,10 @@ export default {
   // },
   async mounted () {
     // 通知actions异步获取address并保存到state
-    // this.$store.dispatch('getAddress')
+    this.$store.dispatch('getAddress') // 首页初始化需要
+    this.$store.dispatch('getCategorys') // 首页初始化需要
+    this.$store.dispatch('getShops') // 首页初始化需要
+    this.$store.dispatch('autoLogin') // 初始化加载后验证自动登录
   },
   // 引入并局部注册FooterGuide组件
   components: {

@@ -5,12 +5,23 @@
 import {
   reqAddress,
   reqCategorys,
-  reqShops
+  reqShops,
+  reqAutoLogin,
+  reqGoods,
+  // reqRatings,
+  reqInfo
 } from '@/api'
 import {
   RECEIVE_ADDRESS,
   RECEIVE_CATEGORYS,
-  RECEIVE_SHOPS
+  RECEIVE_SHOPS,
+  RECEIVE_USER,
+  // RECEIVE_TOKEN,
+  RESET_USER,
+  RESET_TOKEN,
+  RECEIVE_INFO,
+  // RECEIVE_RATINGS,
+  RECEIVE_GOODS
 } from './mutation-types'
 
 export default {
@@ -50,6 +61,62 @@ export default {
     if (result.code === 0) {
       const shops = result.data
       commit(RECEIVE_SHOPS, shops)
+    }
+  },
+
+  // 保存用户数据
+  saveUser ({ commit }, user) {
+    const token = user.token
+    // 将token保存到local
+    localStorage.setItem('token_key', token)
+    // 将token保存到state
+    commit(RESET_TOKEN, { token })
+
+    // 已经保存了token,现在删除user内部的token
+    delete user.token
+
+    // 将user保存到state
+    commit(RECEIVE_USER, { user })
+  },
+
+  // 自动登录的异步action
+  async autoLogin ({ commit, state }) {
+    if (state.token && !state.user._id) { // 必须要有token且没有user信息
+      // 发送自动登录的请求
+      const result = await reqAutoLogin()
+      if (result.code === 0) {
+        const user = result.data // 没有token
+        commit(RECEIVE_USER, { user })
+      }
+    }
+  },
+
+  // 退出登录
+  logout ({ commit }) {
+    localStorage.removeItem('token_key')
+    commit(RESET_USER)
+    commit(RESET_TOKEN)
+  },
+
+  // 异步获取商家信息
+  async getShopInfo ({ commit }, cb) {
+    const result = await reqInfo()
+    if (result.code === 0) {
+      const info = result.data
+      commit(RECEIVE_INFO, { info })
+      // 如果组件中传递了接收消息的回调函数, 数据更新后, 调用回调通知调用的组件
+      typeof cb === 'function' && cb()
+    }
+  },
+
+  // 异步获取商家商品列表
+  async getShopGoods ({ commit }, cb) {
+    const result = await reqGoods()
+    if (result.code === 0) {
+      const goods = result.data
+      commit(RECEIVE_GOODS, { goods })
+      // 如果组件中传递了接收消息的回调函数, 数据更新后, 调用回调通知调用的组件
+      typeof cb === 'function' && cb()
     }
   }
 

@@ -53,13 +53,8 @@
                                 </section>
                                 <section class="shop_rating_order">
                                     <section class="shop_rating_order_left">
-                                        <div class="star star-24">
-                                            <span class="star-item on"></span>
-                                            <span class="star-item on"></span>
-                                            <span class="star-item on"></span>
-                                            <span class="star-item half"></span>
-                                            <span class="star-item off"></span>
-                                        </div>
+                                        <!-- Star -->
+                                        <Star :score="shop.rating" :size="24"/>
                                         <div class="rating_section">
                                             {{shop.rating}}
                                         </div>
@@ -109,8 +104,10 @@ import 'swiper/css/swiper.css'
 import { mapState } from 'vuex'
 // import _ from 'lodash'  //全部引入,体积过大
 import chunk from 'lodash/chunk' // 只打包引入的工具函数 ==>打包文件更小
+import Star from '../../components/Star/Star.vue'
 
 export default {
+  components: { Star },
   computed: {
     ...mapState(['address', 'categorys', 'shops']),
 
@@ -336,26 +333,7 @@ export default {
                                     .shop_rating_order_left
                                         float left
                                         color #ff9a0d
-                                        .star
-                                            float left
-                                            font-size 0
-                                            .star-item
-                                                display inline-block
-                                                background-repeat no-repeat
-                                            &.star-24
-                                                .star-item
-                                                    width 14px
-                                                    height 14px
-                                                    margin-right 2px
-                                                    background-size 14px 14px
-                                                    &:last-child
-                                                        margin-right 0
-                                                    &.on
-                                                        bg-image('./images/stars/star48_on')
-                                                    &.half
-                                                        bg-image('./images/stars/star48_half')
-                                                    &.off
-                                                        bg-image('./images/stars/star48_off')
+                                        // Star
                                         .rating_section
                                             float left
                                             font-size 14px
